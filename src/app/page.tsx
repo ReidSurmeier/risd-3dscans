@@ -1,12 +1,16 @@
-// Home page — stub. frontend-developer specialist will implement.
+import { getAllObjects } from '@/lib/data'
+import NavBar from '@/components/NavBar'
+import HeroText from '@/components/HeroText'
+import ObjectGrid from '@/components/ObjectGrid'
+
 export default function HomePage() {
+  const objects = getAllObjects()
+
   return (
-    <main className="min-h-screen bg-museum-black text-museum-white">
-      <div className="flex items-center justify-center h-screen">
-        <p className="font-mono text-museum-gray text-sm tracking-widest uppercase">
-          RISD Museum 3D Scans — Building
-        </p>
-      </div>
-    </main>
+    <div className="min-h-screen bg-museum-black">
+      <NavBar />
+      <HeroText />
+      <ObjectGrid objects={objects} />
+    </div>
   )
 }

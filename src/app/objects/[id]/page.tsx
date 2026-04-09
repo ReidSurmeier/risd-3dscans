@@ -1,12 +1,34 @@
-// Object detail page — stub. frontend-developer specialist will implement.
-export default function ObjectDetailPage({ params }: { params: { id: string } }) {
+import { notFound } from 'next/navigation'
+import { getObjectById, getAllObjects } from '@/lib/data'
+import { searchMetByArtist, searchMetByQuery } from '@/lib/met-api'
+import NavBar from '@/components/NavBar'
+import ObjectDetail from '@/components/ObjectDetail'
+
+interface PageProps {
+  params: Promise<{ id: string }>
+}
+
+export default async function ObjectDetailPage({ params }: PageProps) {
+  const { id } = await params
+  const object = getObjectById(id)
+
+  if (!object) {
+    notFound()
+  }
+
+  const isUnknownArtist = object.artist.toLowerCase().includes('unknown')
+  const relatedMet = isUnknownArtist
+    ? await searchMetByQuery(object.medium || object.tags?.[0] || '', 6)
+    : await searchMetByArtist(object.artist, 6)
+
   return (
-    <main className="min-h-screen bg-museum-black text-museum-white">
-      <div className="flex items-center justify-center h-screen">
-        <p className="font-mono text-museum-gray text-sm tracking-widest uppercase">
-          Object {params.id} — Building
-        </p>
-      </div>
-    </main>
+    <>
+      <NavBar />
+      <ObjectDetail object={object} relatedMet={relatedMet} />
+    </>
   )
+}
+
+export function generateStaticParams() {
+  return getAllObjects().map((obj) => ({ id: obj.id }))
 }
