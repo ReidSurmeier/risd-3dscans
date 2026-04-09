@@ -2,30 +2,175 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-inter: 'Inter', system-ui, sans-serif;
-  --font-playfair: 'Playfair Display', Georgia, serif;
-  --font-mono: 'JetBrains Mono', monospace;
+/* ─── Base reset ─────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   background-color: #0a0a0a;
   color: #f5f4f0;
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   min-height: 100vh;
-  font-family: var(--font-inter);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #0a0a0a;
+  color: #f5f4f0;
 }
 
-/* Museum grid item hover */
+/* ─── Typography defaults ────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #f5f4f0;
+}
+
+p {
+  max-width: 68ch;
+  color: #ede9e1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ─── Selection ──────────────────────────────────────────────────── */
+
+::selection {
+  background-color: #c8a96e;
+  color: #0a0a0a;
+}
+
+::-moz-selection {
+  background-color: #c8a96e;
+  color: #0a0a0a;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a3a36;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6b6b63;
+}
+
+/* ─── Component classes ──────────────────────────────────────────── */
+
+/* Hero word — each stacked word in HeroText */
+.hero-word {
+  display: block;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: #f5f4f0;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards;
+}
+
+/* Object grid — museum collection layout */
+.object-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .object-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .object-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}
+
+/* Object card — individual grid cell */
 .object-card {
-  @apply transition-all duration-300 ease-in-out;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .object-card:hover {
-  @apply opacity-90;
+  opacity: 0.85;
+  transform: scale(1.01);
+}
+
+/* Meta label — accession numbers, dates, mono metadata */
+.meta-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6b6b63;
+}
+
+/* Section divider — thin horizontal rule between editorial sections */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #3a3a36;
+  margin: 3rem 0;
+  border: none;
+}
+
+/* Stagger utility — apply delay via inline style or nth-child */
+.hero-word:nth-child(1) { animation-delay: 0ms; }
+.hero-word:nth-child(2) { animation-delay: 120ms; }
+.hero-word:nth-child(3) { animation-delay: 240ms; }
+.hero-word:nth-child(4) { animation-delay: 360ms; }
+.hero-word:nth-child(5) { animation-delay: 480ms; }
+.hero-word:nth-child(6) { animation-delay: 600ms; }
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
