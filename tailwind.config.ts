@@ -9,33 +9,39 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
-        mono: ['var(--font-mono)', 'monospace'],
+        display: ['var(--font-display)', 'Space Grotesk', 'IBM Plex Mono', 'monospace'],
+        body: ['var(--font-body)', 'Inter', 'sans-serif'],
+        mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
+        sans: ['var(--font-body)', 'Inter', 'sans-serif'],
       },
       colors: {
-        museum: {
-          black: '#0a0a0a',
-          white: '#f5f4f0',
-          cream: '#ede9e1',
-          gray: '#6b6b63',
-          accent: '#c8a96e',
-          muted: '#3a3a36',
-        },
-      },
-      animation: {
-        'fade-up': 'fadeUp 0.8s ease forwards',
-        'marquee': 'marquee 30s linear infinite',
+        bg: '#fafafa',
+        text: '#212122',
+        gray: '#989898',
+        muted: '#6F6F6F',
+        'accent-red': '#F30000',
+        'accent-orange': '#FF8717',
+        'accent-yellow': '#F0CA00',
+        'accent-green': '#7AEA0A',
+        'accent-teal': '#00C1AA',
+        'accent-blue': '#5034FF',
+        'accent-pink': '#FF68F0',
+        'accent-brown': '#CC834D',
+        'accent-cool': '#4E576D',
       },
       keyframes: {
         fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(24px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+          from: { transform: 'translateY(20px)', opacity: '0' },
+          to: { transform: 'translateY(0)', opacity: '1' },
         },
-        marquee: {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-50%)' },
+        fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
         },
+      },
+      animation: {
+        fadeUp: 'fadeUp 300ms ease-out forwards',
+        fadeIn: 'fadeIn 125ms ease-out forwards',
       },
     },
   },
