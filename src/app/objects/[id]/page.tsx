@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getObjectById, getAllObjects } from '@/lib/data'
-import { searchMetByArtist, searchMetByQuery } from '@/lib/met-api'
+import { findRelatedObjects } from '@/lib/cross-reference'
 import NavBar from '@/components/NavBar'
 import ObjectDetail from '@/components/ObjectDetail'
 
@@ -16,15 +16,13 @@ export default async function ObjectDetailPage({ params }: PageProps) {
     notFound()
   }
 
-  const isUnknownArtist = object.artist.toLowerCase().includes('unknown')
-  const relatedMet = isUnknownArtist
-    ? await searchMetByQuery(object.medium || object.tags?.[0] || '', 6)
-    : await searchMetByArtist(object.artist, 6)
+  // Cross-reference across all connected museums
+  const relatedObjects = await findRelatedObjects(object, { limit: 6 })
 
   return (
     <>
       <NavBar />
-      <ObjectDetail object={object} relatedMet={relatedMet} />
+      <ObjectDetail object={object} relatedObjects={relatedObjects} />
     </>
   )
 }

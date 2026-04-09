@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import type { MuseumObject, MetObject } from '@/types'
+import type { MuseumObject, CrossReferenceResult } from '@/types'
 import RelatedObjects from './RelatedObjects'
 import ModelViewer from './ModelViewer'
 
 interface ObjectDetailProps {
   object: MuseumObject
-  relatedMet: MetObject[]
+  relatedObjects?: CrossReferenceResult[]
 }
 
 function MetaRow({ label, value }: { label: string; value?: string }) {
@@ -56,7 +56,7 @@ function SectionHead({ children }: { children: React.ReactNode }) {
   )
 }
 
-export default function ObjectDetail({ object, relatedMet }: ObjectDetailProps) {
+export default function ObjectDetail({ object, relatedObjects }: ObjectDetailProps) {
   return (
     <main style={{
       background: '#fafafa',
@@ -218,11 +218,11 @@ export default function ObjectDetail({ object, relatedMet }: ObjectDetailProps) 
         </div>
       </div>
 
-      {/* Related objects from Met */}
-      {relatedMet.length > 0 && (
+      {/* Related objects from connected museums */}
+      {relatedObjects && relatedObjects.length > 0 && (
         <div style={{ padding: '0 30px 40px' }}>
-          <SectionHead>Related Works</SectionHead>
-          <RelatedObjects objects={relatedMet} sourceMuseum="met" />
+          <SectionHead>Related Works Across Collections</SectionHead>
+          <RelatedObjects groups={relatedObjects} />
         </div>
       )}
 

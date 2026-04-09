@@ -6,16 +6,16 @@ export default function HeroText() {
   return (
     <section className="hero-section">
       <div className="hero-title-wrap">
-        <h1 style={{ textAlign: 'right' }}>
+        <h1 className="hero-title" style={{ textAlign: 'right' }}>
           <ColorChar text="RISD" />
         </h1>
-        <h1>
+        <h1 className="hero-title">
           <ColorChar text="MUSEUM" />
         </h1>
-        <h1 style={{ transform: 'translateX(1.08em)' }}>
+        <h1 className="hero-title" style={{ transform: 'translateX(1.08em)' }}>
           <ColorChar text="3D SCANS" />
         </h1>
-        <h1 style={{ textAlign: 'right' }}>
+        <h1 className="hero-title" style={{ textAlign: 'right' }}>
           <ColorChar text="COLLECTION" />
         </h1>
       </div>
