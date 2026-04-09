@@ -3,22 +3,29 @@ export interface MuseumObject {
   id: string                    // slug derived from accession number
   accessionNumber: string
   title: string
-  artist: string                // "Unknown Maker" if unknown
-  culture?: string              // e.g. "Chinese", "American"
-  date: string                  // display string e.g. "Qing dynasty, 1644–1912"
+  artist: string                // named artist, "Unknown Maker" if unknown
+  artistFull?: string           // artist name with nationality and dates
+  culture?: string              // e.g. "French", "American"
+  date: string                  // display string e.g. "1874" or "ca. 1885"
   medium: string
   dimensions: string
   description: string           // curatorial text, "" if unavailable
-  imageUrl: string              // primary image from RISD
-  thumbnailUrl?: string         // smaller version if available
+  imageUrl: string              // primary high-res image from RISD (zoom quality)
+  thumbnailUrl?: string         // smaller preview version
   onViewLocation: string        // gallery/room name
-  provenance?: string           // "" if unavailable
+  provenance?: string           // acquisition history
+  credit?: string               // gift/purchase credit line
   exhibitionHistory?: string[]  // empty array if unavailable
   bibliography?: string[]       // empty array if unavailable
   risdUrl: string               // canonical URL on risdmuseum.org
   has3dModel: boolean           // false for now, true when model added
   modelPath?: string            // path to .glb file when available
   tags?: string[]               // for Met cross-reference search
+  // Rich classification metadata for cross-referencing
+  classification?: string       // e.g. "Paintings", "Sculpture", "Prints"
+  artMovement?: string          // e.g. "Impressionism", "Cubism", "Post-Impressionism"
+  timePeriod?: string           // e.g. "19th century", "20th century"
+  geographicOrigin?: string     // e.g. "France", "Spain"
 }
 
 // Met Museum cross-reference result
