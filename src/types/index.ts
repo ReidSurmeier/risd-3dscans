@@ -49,6 +49,31 @@ export interface SearchResult {
   query: string
 }
 
+// External museum cross-reference object
+export interface ExternalObject {
+  id: string
+  title: string
+  artist: string
+  date: string
+  medium: string
+  imageUrl: string
+  thumbnailUrl?: string
+  objectUrl: string        // link to museum's own page
+  museum: string           // museum display name
+  museumId: string         // museum identifier slug
+  department?: string
+  culture?: string
+  period?: string
+  classification?: string
+}
+
+// Cross-reference result grouped by museum
+export interface CrossReferenceResult {
+  museum: string
+  museumId: string
+  objects: ExternalObject[]
+}
+
 // API response wrappers
 export interface ApiObjectsResponse {
   objects: MuseumObject[]
@@ -57,10 +82,25 @@ export interface ApiObjectsResponse {
 
 export interface ApiObjectDetailResponse {
   object: MuseumObject
-  relatedMet: MetObject[]       // up to 6 related Met objects
+  relatedMet: MetObject[]           // up to 6 related Met objects (legacy)
+  relatedObjects: CrossReferenceResult[]  // cross-reference results grouped by museum
 }
 
 export interface ApiSearchResponse {
   results: SearchResult
+  total: number
+}
+
+export interface MuseumStatus {
+  id: string
+  name: string
+  url: string
+  requiresKey: boolean
+  configured: boolean
+  objectCount?: string
+}
+
+export interface ApiMuseumsResponse {
+  museums: MuseumStatus[]
   total: number
 }
