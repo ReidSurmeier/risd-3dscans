@@ -2,8 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Base reset ─────────────────────────────────────────────────── */
+/* ── CSS custom properties ── */
+:root {
+  --margin: 15px;
+  --grey: #989898;
+  --main-font-size: 3.4vw;
+  --main-line-height: 1.2;
+}
 
+/* ── Reset ── */
 *,
 *::before,
 *::after {
@@ -12,165 +19,375 @@
   padding: 0;
 }
 
+/* ── Base ── */
 html {
-  background-color: #0a0a0a;
-  color: #f5f4f0;
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-family: var(--font-body), 'Inter', sans-serif;
 }
 
 body {
+  background: #fafafa;
+  color: #212122;
+  margin: var(--margin);
   min-height: 100vh;
-  font-family: var(--font-inter), system-ui, sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #0a0a0a;
-  color: #f5f4f0;
 }
 
-/* ─── Typography defaults ────────────────────────────────────────── */
+/* ── Hide scrollbar ── */
+body::-webkit-scrollbar { display: none; }
+body { -ms-overflow-style: none; scrollbar-width: none; }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-playfair), Georgia, serif;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: #f5f4f0;
-}
-
-p {
-  max-width: 68ch;
-  color: #ede9e1;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-/* ─── Selection ──────────────────────────────────────────────────── */
-
+/* ── Text selection — adamho.com ── */
 ::selection {
-  background-color: #c8a96e;
-  color: #0a0a0a;
+  background: #020c1a;
+  color: #ffffff;
 }
 
-::-moz-selection {
-  background-color: #c8a96e;
-  color: #0a0a0a;
-}
+/* ── Scrollbar (visible areas, light themed) ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #fafafa; }
+::-webkit-scrollbar-thumb { background: #989898; }
 
-/* ─── Scrollbar ──────────────────────────────────────────────────── */
+/* ── Links ── */
+a { color: inherit; text-decoration: none; }
+a:hover { opacity: 0.7; }
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
+/* ── Images ── */
+img { display: block; max-width: 100%; }
 
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #3a3a36;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #6b6b63;
-}
-
-/* ─── Component classes ──────────────────────────────────────────── */
-
-/* Hero word — each stacked word in HeroText */
-.hero-word {
-  display: block;
-  font-family: var(--font-playfair), Georgia, serif;
-  font-weight: 900;
-  line-height: 0.92;
-  letter-spacing: -0.03em;
-  color: #f5f4f0;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards;
-}
-
-/* Object grid — museum collection layout */
-.object-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-
-@media (min-width: 768px) {
-  .object-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-  }
-}
-
-@media (min-width: 1280px) {
-  .object-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-  }
-}
-
-/* Object card — individual grid cell */
-.object-card {
+/* ── Buttons ── */
+button {
+  border: 0;
+  text-align: left;
   cursor: pointer;
-  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.object-card:hover {
-  opacity: 0.85;
-  transform: scale(1.01);
-}
-
-/* Meta label — accession numbers, dates, mono metadata */
-.meta-label {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #6b6b63;
-}
-
-/* Section divider — thin horizontal rule between editorial sections */
-.section-divider {
-  width: 100%;
-  height: 1px;
-  background-color: #3a3a36;
-  margin: 3rem 0;
-  border: none;
-}
-
-/* Stagger utility — apply delay via inline style or nth-child */
-.hero-word:nth-child(1) { animation-delay: 0ms; }
-.hero-word:nth-child(2) { animation-delay: 120ms; }
-.hero-word:nth-child(3) { animation-delay: 240ms; }
-.hero-word:nth-child(4) { animation-delay: 360ms; }
-.hero-word:nth-child(5) { animation-delay: 480ms; }
-.hero-word:nth-child(6) { animation-delay: 600ms; }
-
+/* ── Keyframe animations ── */
 @keyframes fadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
 }
 
-@keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Hero title — counterarchiving.xyz style ── */
+.hero-section {
+  position: relative;
+  width: calc(100vw - 30px);
+  height: 100vh;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.hero-title-wrap {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero-title {
+  font-family: var(--font-display), 'Space Grotesk', 'IBM Plex Mono', monospace;
+  font-size: 14vw;
+  line-height: 0.8;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  white-space: pre;
+  font-weight: 700;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .hero-title { font-size: 12vw; }
+}
+
+/* Per-character span — colorful font effect */
+.hero-title span {
+  position: relative;
+  display: inline-block;
+}
+
+/* Ghost pseudo-elements with mix-blend-mode: multiply */
+.hero-title span.show2::before {
+  content: attr(data-char2);
+  color: var(--random-color-2, #F30000);
+  position: absolute;
+  line-height: 0.8;
+  mix-blend-mode: multiply;
+  top: 0;
+  left: 0;
+}
+
+.hero-title span.show1::after {
+  content: attr(data-char1);
+  color: var(--random-color-1, #5034FF);
+  position: absolute;
+  line-height: 0.8;
+  mix-blend-mode: multiply;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+}
+
+/* Hover resets all chars to black, hides ghosts */
+.hero-title:hover span { color: black !important; }
+.hero-title:hover span.show1::after,
+.hero-title:hover span.show2::before { display: none; }
+
+/* Line-specific layout — counterarchiving.xyz */
+.hero-title:first-child { text-align: right; }
+.hero-title:last-child  { text-align: right; }
+
+@media screen and (aspect-ratio > 1.4) {
+  .hero-title:last-child  { transform: translateY(-100%); text-align: right; }
+  .hero-title:nth-child(3) { transform: translateX(1.08em); }
+}
+
+.hero-title:nth-child(3) { transform: translateX(2.28em); }
+
+/* ── Object list — counterarchiving.xyz contents ── */
+.contents {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 200px;
+}
+
+.contents li {
+  position: relative;
+  margin-bottom: 3em;
+}
+
+.contents li a {
+  text-decoration: none;
+  font-family: var(--font-display), 'Space Grotesk', monospace;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 4.1vw;
+  color: #212122;
+  display: inline-block;
+  letter-spacing: -0.02em;
+  line-height: 0.8;
+}
+
+.contents li a span {
+  position: relative;
+  display: inline-block;
+}
+
+.contents li a span::before {
+  content: attr(data-char);
+  position: absolute;
+  mix-blend-mode: multiply;
+  color: var(--before-color, transparent);
+  top: 0;
+  left: 0;
+}
+
+.contents li:hover a span { color: black !important; }
+.contents li:hover a span:not(:hover)::before { display: none; }
+
+@media screen and (max-width: 960px) {
+  .contents li { left: 0 !important; }
+  .contents li a { font-size: 40px; }
+}
+
+/* ── Object entry (generic block) ── */
+.object-entry {
+  margin-bottom: 3em;
+  cursor: pointer;
+}
+
+.object-entry:hover { opacity: 0.7; }
+
+/* ── Object card — crosshair cursor from adamho.com ── */
+.object-card {
+  cursor: crosshair;
+  transition: opacity 150ms ease-out;
+}
+
+.object-card:hover { opacity: 0.7; }
+
+/* ── Staggered fade-in — adamho.com (150ms per item) ── */
+.stagger-item {
+  opacity: 0;
+  animation: fadeIn 125ms ease-out forwards;
+}
+
+.stagger-item:nth-child(1)  { animation-delay: 0ms; }
+.stagger-item:nth-child(2)  { animation-delay: 150ms; }
+.stagger-item:nth-child(3)  { animation-delay: 300ms; }
+.stagger-item:nth-child(4)  { animation-delay: 450ms; }
+.stagger-item:nth-child(5)  { animation-delay: 600ms; }
+.stagger-item:nth-child(6)  { animation-delay: 750ms; }
+.stagger-item:nth-child(7)  { animation-delay: 900ms; }
+.stagger-item:nth-child(8)  { animation-delay: 1050ms; }
+.stagger-item:nth-child(9)  { animation-delay: 1200ms; }
+.stagger-item:nth-child(10) { animation-delay: 1350ms; }
+
+/* ── Meta labels ── */
+.meta-label {
+  font-family: var(--font-mono), 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #989898;
+}
+
+/* Legacy alias */
+.detail-meta-label {
+  font-family: var(--font-mono), 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #989898;
+  font-weight: 500;
+}
+
+/* ── Section divider ── */
+.section-divider,
+.section-rule {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 2em 0;
+}
+
+/* ── Info pill ── */
+.information {
+  box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.3);
+  background: white;
+  border-radius: 100px;
+  z-index: 1000;
+  transition: box-shadow 400ms;
+  margin-bottom: 0;
+}
+
+.information .preview {
+  background: white;
+  padding: 60px 80px;
+  border-radius: 100px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-display), 'Space Grotesk', monospace;
+  font-size: 3vw;
+}
+
+.information .preview .read-more {
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.information:hover .preview .read-more { opacity: 1; }
+.information:hover { box-shadow: 0px 5px 40px 0px rgba(0, 0, 0, 0.5); }
+
+.information.active {
+  overflow: scroll;
+  width: calc(100vw - 130px);
+  top: 50px;
+  right: 50px;
+  position: fixed;
+  border-radius: 40px;
+}
+
+.information.active .preview { display: none; }
+.information.active .content { display: block; }
+.information.active ~ * { filter: blur(20px); pointer-events: none; }
+
+.information .content {
+  display: none;
+  padding: 80px;
+  border-radius: 40px;
+}
+
+.information .content p {
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  max-width: 600px;
+  margin: auto;
+  margin-bottom: 1em;
+  font-family: var(--font-body), 'Inter', sans-serif;
+  color: #212122;
+}
+
+/* ── Close button ── */
+.close-info-btn {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 80px;
+  font-family: var(--font-display), 'Space Grotesk', monospace;
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 1;
+  padding: 10px 20px;
+  z-index: 2000;
+}
+
+/* ── Score/nav bar ── */
+.score-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  gap: 10px;
+}
+
+.back-btn {
+  background: white;
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-family: var(--font-display), 'Space Grotesk', monospace;
+  font-size: 18px;
+  font-weight: 600;
+  color: #212122;
+  text-decoration: none;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 200ms;
+}
+
+.back-btn:hover {
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+  opacity: 1;
+}
+
+.nav-pill {
+  background: white;
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-family: var(--font-display), 'Space Grotesk', monospace;
+  font-size: 16px;
+  font-weight: 500;
+  color: #212122;
+  text-decoration: none;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+}
+
+/* ── Related card links ── */
+.related-card-link {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.related-card-link:hover { opacity: 0.7; }
+
+/* ── Mobile ── */
+@media screen and (max-width: 960px) {
+  .information .preview { font-size: 5vw; padding: 40px; }
 }

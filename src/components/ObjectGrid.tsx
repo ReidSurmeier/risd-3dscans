@@ -1,5 +1,5 @@
 import type { MuseumObject } from '@/types'
-import ObjectCard from './ObjectCard'
+import ObjectEntry from './ObjectEntry'
 
 interface ObjectGridProps {
   objects: MuseumObject[]
@@ -8,17 +8,22 @@ interface ObjectGridProps {
 export default function ObjectGrid({ objects }: ObjectGridProps) {
   if (objects.length === 0) {
     return (
-      <p className="font-mono text-museum-gray text-sm px-6 md:px-12">
+      <p style={{
+        fontFamily: 'var(--font-gothic), "Gothic A1", monospace',
+        fontSize: '3.4vw',
+        marginTop: '200px',
+        color: '#989898',
+      }}>
         Collection loading...
       </p>
     )
   }
 
   return (
-    <div className="object-grid px-6 md:px-12 pb-24">
-      {objects.map((obj) => (
-        <ObjectCard key={obj.id} object={obj} />
+    <ul style={{ listStyle: 'none', margin: 0, padding: 0, marginTop: '200px' }}>
+      {objects.map((obj, i) => (
+        <ObjectEntry key={obj.id} object={obj} index={i} />
       ))}
-    </div>
+    </ul>
   )
 }
