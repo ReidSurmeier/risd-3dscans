@@ -10,7 +10,7 @@ export default function NavBar() {
         href="/search"
         className="font-mono text-museum-gray text-xs tracking-widest uppercase hover:text-museum-white transition-colors"
       >
-        Collection
+        Search
       </Link>
     </nav>
   )

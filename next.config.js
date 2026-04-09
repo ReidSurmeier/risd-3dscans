@@ -13,6 +13,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'risdmuseum.cdn.picturepark.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'images.metmuseum.org',
       },
       {
