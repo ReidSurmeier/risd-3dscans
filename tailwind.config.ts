@@ -18,8 +18,9 @@ const config: Config = {
           black: '#0a0a0a',
           white: '#f5f4f0',
           cream: '#ede9e1',
-          gray: '#888880',
+          gray: '#6b6b63',
           accent: '#c8a96e',
+          muted: '#3a3a36',
         },
       },
       animation: {
