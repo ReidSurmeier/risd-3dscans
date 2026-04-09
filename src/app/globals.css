@@ -8,6 +8,7 @@
   --grey: #989898;
   --main-font-size: 3.4vw;
   --main-line-height: 1.2;
+  --font-gothic: var(--font-display);
 }
 
 /* ── Reset ── */
